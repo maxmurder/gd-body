@@ -22,7 +22,7 @@
         ]
     },
     "MUSCLE" : {
-        "name" : "bone",
+        "name" : "muscle",
         "hardness" : 0.25,
         "dnouns" : [
             "bruise",
