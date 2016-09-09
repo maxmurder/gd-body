@@ -1,0 +1,81 @@
+{
+    "BONE" : {
+        "name" : "bone",
+        "hardness" : 1.0,
+        "dnouns" : [
+            "crack",
+            "fracture",
+            "break",
+            "shatter"
+        ],
+        "dadgs" : [
+            "cracked",
+            "fractured",
+            "broken",
+            "shattered"
+        ],
+        "dverbs" : [
+            "cracking",
+            "fracturing",
+            "breaking",
+            "shattering"
+        ]
+    },
+    "MUSCLE" : {
+        "name" : "bone",
+        "hardness" : 0.25,
+        "dnouns" : [
+            "bruise",
+            "tear",
+            "laceration"
+        ],
+        "dadgs" : [
+            "bruised",
+            "torn",
+            "lacerated"
+        ],
+        "dverbs" : [
+            "bruising",
+            "tearing",
+            "lacerating"
+        ]
+    },
+    "SKIN" : {
+        "name" : "skin",
+        "hardness" : 0.1,
+        "dnouns" : [
+            "bruise",
+            "tear",
+            "laceration"
+        ],
+        "dadgs" : [
+            "bruised",
+            "torn",
+            "lacerated"
+        ],
+        "dverbs" : [
+            "bruising",
+            "tearing",
+            "lacerating"
+        ]
+    },
+    "NERVE" : {
+        "name" : "nervous tissue",
+        "hardness" : 0.1,
+            "dnouns" : [
+            "bruise",
+            "tear",
+            "laceration"
+        ],
+        "dadgs" : [
+            "bruised",
+            "torn",
+            "lacerated"
+        ],
+        "dverbs" : [
+            "bruising",
+            "tearing",
+            "lacerating"
+        ]
+    }
+}

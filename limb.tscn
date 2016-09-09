@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://limb.gd" type="Script" id=1]
+
+[node name="limb" type="Node"]
+
+script/script = ExtResource( 1 )
+size = 1.0
+internal = false
+vital = false
+material = [ "NONE" ]
+
+
