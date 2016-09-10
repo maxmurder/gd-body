@@ -1,56 +1,9 @@
 {
-    "VITAL" : {
-        "FUNCTION" : [
-            "CONCIOUSNESS"
-        ],
-        "DAMAGE_EFFECT" : [
-            "FATAL"
-        ]
-    },
-    "VASCULAR" : {
-        "FUNCTION" : [
-            "CIRCULATION"
-        ],
-        "DAMAGE_EFFECT" : [
-            "BLEED_MINOR"
-        ]
-    },
-    "ARTEREAL" : {
-        "FUNCTION" : [
-            "CIRCULATION"
-        ],
-        "DAMAGE_EFFECT" : [
-            "BLEED_MAJOR"
-        ]
-    },
-    "RESPRITORY" :
-    {
-        "FUNCTION" : [
-            "CIRCULATION",
-            "RESPERATION"
-        ],
-    },
-    "NERVOUS" :
-    {
-        "FUNCTION" : [
-            "SENSORY",
-            "MOTOR"
-        ],
-        "DAMAGE_EFFECT" :
-        [
-            "PARALYSIS"
-        ]
-    },
-    "LOCOMOTIVE" : {
-        "FUNCTION" : [
-            "LOCOMOTION"
-        ]
-    },
-    "GRASP" : {
-        "FUNCTION" : [
-            "GRASP",
-            "LOCOMOTION"
-        ]
-    },
-    "INTERNAL" : {},
+    "SENSORY" : {},
+    "MOTOR" : {},
+    "CIRCULATION" : {},
+    "RESPERATION" : {},
+    "DIGESTIVE" : {},
+    "LOCOMOTION" : {},
+    "GRASP" :{},
 }

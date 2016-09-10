@@ -1,0 +1,39 @@
+{
+    "VITAL" : {},
+    "INTERNAL" : {},
+    "VASCULAR" : {
+        "SYSTEMS" : [
+            "CIRCULATION"
+        ]
+    },
+    "ARTEREAL" : {
+        "SYSTEMS" : [
+            "CIRCULATION"
+        ]
+    },
+    "RESPRITORY" :
+    {
+        "SYSTEMS" : [
+            "CIRCULATION",
+            "RESPERATION"
+        ],
+    },
+    "NERVOUS" :
+    {
+        "SYSTEMS" : [
+            "SENSORY",
+            "MOTOR"
+        ],
+    },
+    "LOCOMOTION" : {
+        "SYSTEMS" : [
+            "LOCOMOTION"
+        ]
+    },
+    "GRASP" : {
+        "SYSTEMS" : [
+            "GRASP",
+            "LOCOMOTION"
+        ]
+    }
+}
