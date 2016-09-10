@@ -12,9 +12,9 @@ func detach():
         n.detach()
 
 func damage(damage):
-    for l in layers:
-        l["INTEGRITY"] = l["INTEGRITY"] - damage
-        l["DAMAGE"] = l["DAMAGE"] + damage
+    for l in layers.keys():
+        layers[l]["INTEGRITY"] = layers[l]["INTEGRITY"] - damage
+        layers[l]["DAMAGE"] = layers[l]["DAMAGE"] + damage
     pass
 
 static func processlayers(materials):

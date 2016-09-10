@@ -1,9 +1,26 @@
 {
-    "SENSORY" : {},
-    "MOTOR" : {},
-    "CIRCULATION" : {},
-    "RESPERATION" : {},
-    "DIGESTIVE" : {},
-    "LOCOMOTION" : {},
-    "GRASP" :{},
+    "COGNITION" : {
+        "DEPENDS" : ["SENSORY", "CIRCULATION"]
+    },
+    "SENSORY" : {
+        "DEPENDS" : ["COGNITION","CIRCULATION"]
+    },
+    "MOTOR" : {
+        "DEPENDS" : ["SENSORY", "CIRCULATION"]
+    },
+    "CIRCULATION" : {
+        "DEPENDS" : ["RESPERATION", "MOTOR"]
+    },
+    "RESPERATION" : {
+        "DEPENDS" : ["MOTOR", "CIRCULATION"]
+    },
+    "DIGESTIVE" : {
+        "DEPENDS" : ["MOTOR", "CIRCULATION"]
+    },
+    "LOCOMOTION" : {
+        "DEPENDS" : ["MOTOR", "SENSORY", "CIRCULATION"]
+    },
+    "GRASP" :{
+        "DEPENDS" : ["MOTOR", "SENSORY", "CIRCULATION"]
+    },
 }

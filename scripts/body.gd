@@ -15,6 +15,11 @@ func _ready():
     _systems = processsystems(_limbs)
     pass
 
+func getsystem(system):
+    if _systems.has(system):
+        return _systems[system]
+    return false
+
 func processsystems(limbs):
     if _systemdata == null:
         return

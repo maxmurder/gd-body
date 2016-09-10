@@ -14,9 +14,14 @@
     "RESPRITORY" :
     {
         "SYSTEMS" : [
-            "CIRCULATION",
             "RESPERATION"
         ],
+    },
+    "COGNITIVE" :
+    {
+        "SYSTEMS" : [
+            "COGNITION"
+        ]
     },
     "NERVOUS" :
     {
@@ -34,6 +39,11 @@
         "SYSTEMS" : [
             "GRASP",
             "LOCOMOTION"
+        ]
+    },
+    "DIGESTION" : {
+        "SYSTEMS" : [
+            "DIGESTIVE"
         ]
     }
 }

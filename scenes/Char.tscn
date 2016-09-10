@@ -20,8 +20,14 @@ flagFile = "res://data/flags.json"
 material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
 flags = StringArray( "VASCULAR", "ARTEREAL" )
 
+[node name="stomach" parent="Body/body_lower" instance=ExtResource( 1 )]
+
+material_layers = StringArray( "SKIN", "MUSCLE" )
+flags = StringArray( "INTERNAL", "DIGESTON", "VASCULAR" )
+
 [node name="body_upper" parent="Body/body_lower" instance=ExtResource( 1 )]
 
+editor/display_folded = true
 material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
 flags = StringArray( "VASCULAR", "ARTEREAL" )
 
@@ -34,6 +40,7 @@ flags = StringArray( "VASCULAR", "ARTEREAL", "NERVOUS" )
 
 [node name="head" parent="Body/body_lower/body_upper/neck" instance=ExtResource( 1 )]
 
+editor/display_folded = true
 size = 0.25
 material_layers = StringArray( "SKIN", "MUSCLE", "BONE" )
 flags = StringArray( "VASCULAR" )
@@ -42,7 +49,7 @@ flags = StringArray( "VASCULAR" )
 
 size = 0.1
 material_layers = StringArray( "NERVE" )
-flags = StringArray( "VITAL", "INTERNAL", "NERVOUS", "VASCULAR", "ARTEREAL" )
+flags = StringArray( "VITAL", "INTERNAL", "NERVOUS", "VASCULAR", "ARTEREAL", "COGNITIVE" )
 
 [node name="lung_l" parent="Body/body_lower/body_upper" instance=ExtResource( 1 )]
 
@@ -55,6 +62,12 @@ flags = StringArray( "RESPRITORY", "VASCULAR", "ARTEREAL" )
 size = 0.1
 material_layers = StringArray( "MUSCLE" )
 flags = StringArray( "RESPRITORY", "VASCULAR", "ARTEREAL" )
+
+[node name="heart" parent="Body/body_lower/body_upper" instance=ExtResource( 1 )]
+
+size = 0.1
+material_layers = StringArray( "MUSCLE" )
+flags = StringArray( "VITAL", "ARTEREAL", "INTERNAL" )
 
 [node name="l_arm_upper" parent="Body/body_lower/body_upper" instance=ExtResource( 1 )]
 
@@ -94,8 +107,14 @@ size = 0.1
 material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
 flags = StringArray( "VASCULAR", "GRASP" )
 
+[node name="stomach" parent="Body/body_lower/body_upper/r_arm_upper/r_arm_lower" instance=ExtResource( 1 )]
+
+material_layers = StringArray( "SKIN", "MUSCLE" )
+flags = StringArray( "VASCULAR", "DIGESTION" )
+
 [node name="l_leg_upper" parent="Body/body_lower" instance=ExtResource( 1 )]
 
+editor/display_folded = true
 size = 0.25
 material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
 flags = StringArray( "VASCULAR", "ARTEREAL" )
@@ -114,6 +133,7 @@ flags = StringArray( "VASCULAR", "LOCOMOTION" )
 
 [node name="r_leg_upper" parent="Body/body_lower" instance=ExtResource( 1 )]
 
+editor/display_folded = true
 size = 0.25
 material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
 flags = StringArray( "VASCULAR", "ARTEREAL" )
