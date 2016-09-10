@@ -1,16 +1,128 @@
 [gd_scene load_steps=3 format=1]
 
-[ext_resource path="res://body.gd" type="Script" id=1]
-[ext_resource path="res://limb.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/body.gd" type="Script" id=1]
+[ext_resource path="res://scenes/limb.tscn" type="PackedScene" id=2]
 
 [node name="Char" type="Node2D"]
 
 [node name="Body" type="Node" parent="."]
 
 script/script = ExtResource( 1 )
+materialsFile = "res://data/materials.json"
+systemFile = "res://data/systems.json"
 
-[node name="limb" parent="Body" instance=ExtResource( 2 )]
+[node name="body_lower" parent="Body" instance=ExtResource( 2 )]
 
-size = 0.5
+material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
+
+[node name="body_upper" parent="Body/body_lower" instance=ExtResource( 2 )]
+
+material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
+limb_flags = StringArray( "VASCULAR", "ARTEREAL" )
+
+[node name="neck" parent="Body/body_lower/body_upper" instance=ExtResource( 2 )]
+
+size = 0.1
+material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
+limb_flags = StringArray( "VASCULAR", "ARTEREAL", "NERVOUS" )
+
+[node name="head" parent="Body/body_lower/body_upper/neck" instance=ExtResource( 2 )]
+
+size = 0.25
+material_layers = StringArray( "SKIN", "MUSCLE", "BONE" )
+limb_flags = StringArray( "VASCULAR" )
+
+[node name="brain" parent="Body/body_lower/body_upper/neck/head" instance=ExtResource( 2 )]
+
+size = 0.1
+material_layers = StringArray( "NERVE" )
+limb_flags = StringArray( "VITAL", "VASCULAR", "ARTEREAL", "INTERNAL", "NERVOUS" )
+
+[node name="lung_l" parent="Body/body_lower/body_upper" instance=ExtResource( 2 )]
+
+size = 0.1
+material_layers = StringArray( "MUSCLE" )
+limb_flags = StringArray( "RESPRITORY", "VASCULAR", "ARTEREAL", "INTERNAL" )
+
+[node name="lung_r" parent="Body/body_lower/body_upper" instance=ExtResource( 2 )]
+
+size = 0.1
+material_layers = StringArray( "MUSCLE" )
+limb_flags = StringArray( "RESPRITORY", "VASCULAR", "ARTEREAL", "INTERNAL" )
+
+[node name="l_arm_upper" parent="Body/body_lower/body_upper" instance=ExtResource( 2 )]
+
+editor/display_folded = true
+size = 0.25
+material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
+limb_flags = StringArray( "VASCULAR", "ARTEREAL" )
+
+[node name="l_arm_lower" parent="Body/body_lower/body_upper/l_arm_upper" instance=ExtResource( 2 )]
+
+size = 0.25
+material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
+limb_flags = StringArray( "VASCULAR", "ARTEREAL" )
+
+[node name="l_hand" parent="Body/body_lower/body_upper/l_arm_upper/l_arm_lower" instance=ExtResource( 2 )]
+
+size = 0.1
+material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
+limb_flags = StringArray( "VASCULAR", "GRASP" )
+
+[node name="r_arm_upper" parent="Body/body_lower/body_upper" instance=ExtResource( 2 )]
+
+size = 0.25
+material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
+limb_flags = StringArray( "VASCULAR", "ARTEREAL" )
+
+[node name="r_arm_lower" parent="Body/body_lower/body_upper/r_arm_upper" instance=ExtResource( 2 )]
+
+size = 0.25
+material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
+limb_flags = StringArray( "VASCULAR", "ARTEREAL" )
+
+[node name="r_hand" parent="Body/body_lower/body_upper/r_arm_upper/r_arm_lower" instance=ExtResource( 2 )]
+
+size = 0.1
+material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
+limb_flags = StringArray( "VASCULAR", "GRASP" )
+
+[node name="l_leg_upper" parent="Body/body_lower" instance=ExtResource( 2 )]
+
+editor/display_folded = true
+size = 0.25
+material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
+limb_flags = StringArray( "VASCULAR", "ARTEREAL" )
+
+[node name="l_leg_lower" parent="Body/body_lower/l_leg_upper" instance=ExtResource( 2 )]
+
+size = 0.25
+material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
+limb_flags = StringArray( "VASCULAR", "ARTEREAL" )
+
+[node name="l_foot" parent="Body/body_lower/l_leg_upper/l_leg_lower" instance=ExtResource( 2 )]
+
+size = 0.1
+material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
+limb_flags = StringArray( "VASCULAR", "LOCOMOTIVE" )
+
+[node name="r_leg_upper" parent="Body/body_lower" instance=ExtResource( 2 )]
+
+editor/display_folded = true
+size = 0.25
+material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
+limb_flags = StringArray( "VASCULAR", "ARTEREAL" )
+
+[node name="r_leg_lower" parent="Body/body_lower/r_leg_upper" instance=ExtResource( 2 )]
+
+size = 0.25
+material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
+limb_flags = StringArray( "VASCULAR", "ARTEREAL" )
+
+[node name="r_foot" parent="Body/body_lower/r_leg_upper/r_leg_lower" instance=ExtResource( 2 )]
+
+size = 0.1
+material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
+limb_flags = StringArray( "VASCULAR", "LOCOMOTIVE" )
 
 
