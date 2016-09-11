@@ -1,10 +1,8 @@
 extends Node
 
-export(String, FILE) var materialsFile
 export(String, FILE) var systemFile
 export(String, FILE) var flagFile
 
-onready var _materialdata = loadjson(materialsFile)
 onready var _systemdata = loadjson(systemFile)
 onready var _flagdata = loadjson(flagFile)
 var _limbs = {}
