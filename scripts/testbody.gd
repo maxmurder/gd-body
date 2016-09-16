@@ -5,6 +5,7 @@ export(float) var vitalThresholdIntegrity = 1.0
 export(float) var vitalThresholdDamage = 0.0
 
 var _status = {}
+const _limbscript = preload("res://scripts/limb.gd")
 
 func _ready():
     set_process(true)
@@ -30,8 +31,10 @@ func _unhandled_input(ev):
 func severlimb(limb):
     var node = get_node(limb)
     var parent = node.get_parent()
-    node.detach()
-    #parent.damage(0.5)
+    if node extends _limbscript:
+        node.detach()
+    if parent extends _limbscript:
+        parent.damage(0.5)
     pass
 
 #checks status of system and its dependencies
