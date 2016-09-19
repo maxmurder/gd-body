@@ -9,9 +9,12 @@
 [node name="body" parent="." instance=ExtResource( 1 )]
 
 script/script = ExtResource( 2 )
+materialFile = "res://data/materials.json"
 systemThreshold = 0.5
 vitalThresholdIntegrity = 1.0
 vitalThresholdDamage = 0.0
+vesselBleedRate = 0.5
+arteryBleedRate = 5.0
 
 [node name="Label" type="Label" parent="."]
 

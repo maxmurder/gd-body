@@ -10,7 +10,7 @@ func _unhandled_input(ev):
             var i = randi() % _limbs.keys().size()
             print(_limbs.keys()[i])
             if ev.button_index == BUTTON_LEFT:
-                damagelimb(_limbs.keys()[i], 0.5)
+                damagelimb(_limbs.keys()[i], 0.5, 0.5)
             if ev.button_index == BUTTON_RIGHT:
-                severlimb(_limbs.keys()[i])
+                severlimb(_limbs.keys()[i], 0.5)
     pass

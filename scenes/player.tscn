@@ -15,9 +15,12 @@ movespeed = 100.0
 [node name="body" parent="." instance=ExtResource( 2 )]
 
 script/script = ExtResource( 3 )
+materialFile = "res://data/materials.json"
 systemThreshold = 0.5
 vitalThresholdIntegrity = 1.0
 vitalThresholdDamage = 0.0
+vesselBleedRate = 0.5
+arteryBleedRate = 5.0
 
 [node name="Sprite" type="Sprite" parent="."]
 

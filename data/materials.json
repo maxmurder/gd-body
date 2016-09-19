@@ -1,7 +1,10 @@
 {
     "BONE" : {
         "name" : "bone",
-        "hardness" : 1.0,
+        "hardness" : 5,
+        "flags":[
+            "STRUCTURE"
+        ],
         "dnouns" : [
             "crack",
             "fracture",
@@ -23,7 +26,10 @@
     },
     "MUSCLE" : {
         "name" : "muscle",
-        "hardness" : 0.25,
+        "hardness" : 1,
+        "flags": [
+            "VASCULAR"
+        ],
         "dnouns" : [
             "bruise",
             "tear",
@@ -42,7 +48,10 @@
     },
     "SKIN" : {
         "name" : "skin",
-        "hardness" : 0.1,
+        "hardness" : 0.5,
+        "flags":[
+            "VASCULAR"
+        ],
         "dnouns" : [
             "bruise",
             "tear",
@@ -61,8 +70,11 @@
     },
     "NERVE" : {
         "name" : "nervous tissue",
-        "hardness" : 0.1,
-            "dnouns" : [
+        "hardness" : 0.5,
+        "flags":[
+            "VASCULAR"
+        ],
+        "dnouns" : [
             "bruise",
             "tear",
             "laceration"
@@ -76,6 +88,13 @@
             "bruising",
             "tearing",
             "lacerating"
+        ]
+    },
+    "ARTERY" : {
+        "name" : "artery",
+        "hardness" : 0.5,
+        "flags":[
+            "ARTEREAL"
         ]
     }
 }

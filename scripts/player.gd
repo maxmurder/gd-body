@@ -37,7 +37,7 @@ func _unhandled_input(ev):
             var i = randi() % bodynode._limbs.keys().size()
             print(bodynode._limbs.keys()[i])
             if ev.button_index == BUTTON_LEFT:
-                bodynode.damagelimb(bodynode._limbs.keys()[i], 0.5)
+                bodynode.damagelimb(bodynode._limbs.keys()[i], 0.5, 0.5)
             if ev.button_index == BUTTON_RIGHT:
                 bodynode.severlimb(bodynode._limbs.keys()[i])
     pass

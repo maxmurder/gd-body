@@ -1,17 +1,23 @@
 extends "res://scripts/body.gd"
 
+export(String, FILE) var materialFile
 export(float) var systemThreshold = 0.5
-export(float) var vitalThresholdIntegrity = 1.0
-export(float) var vitalThresholdDamage = 0.0
+export(float) var vitalThresholdIntegrity = 0.5
+export(float) var vitalThresholdDamage = 0.25
+export(float) var vesselBleedRate = 0.5
+export(float) var arteryBleedRate = 5.0
 
 var _status = {}
-var _blood = 1000
+var _circsystem = {}
+var _blood = 1000.0
 const _limbscript = preload("res://scripts/limb.gd")
+onready var _materaldata = loadjson(materialFile)
 
 func _ready():
     set_process(true)
     for s in _systems:
         _status[s] = checkstatus(s)
+    _circsystem = getsystem("CIRCULATION")
     pass
 
 func _process(delta):
@@ -19,26 +25,44 @@ func _process(delta):
         _status[s] = checkstatus(s);
     pass
 
-func damagelimb(limb, damage):
+#do damage to a limb
+#falloff is the multiplier on the damage done to immidate children marked internal
+#child damamge is a chance based on relative size
+func damagelimb(limb, damage, falloff):
     var node = get_node(limb)
     if node extends _limbscript:
-        node.damage(damage)
+        damage(node, damage)
         for n in node.get_children():
             if n extends _limbscript:
                 for f in n.flags:
                     if f == "INTERNAL":
-                        print(n.get_path())
-                        n.damage(damage * 0.5)
+                        randomize()
+                        if randi() % 100 > 100 * abs(node.size - n.size):
+                            print(n.get_path())
+                            damage(n, damage * falloff)
                         break
     pass
 
-func severlimb(limb):
+#sever a limb, and do damage to it
+func severlimb(limb, damage):
     var node = get_node(limb)
     var parent = node.get_parent()
     if node extends _limbscript:
         node.detach()
     if parent extends _limbscript:
-        parent.damage(0.5)
+        parent.damage(damage)
+    pass
+
+#applies damage to a limb
+func damage(limb, damage):
+    var layers = limb.layers;
+    for l in layers.keys():
+        var d = damage
+        if _materaldata.has(l):
+            d =  damage / ( layers[l]["LAYER"] + _materaldata[l]["hardness"] )
+        layers[l]["INTEGRITY"] = layers[l]["INTEGRITY"] - d
+        layers[l]["DAMAGE"] = layers[l]["DAMAGE"] + d
+    limb.layers = layers
     pass
 
 #checks status of system and its dependencies
@@ -54,7 +78,7 @@ func checksystem(system):
             return false
     return true
 
-#checks status of individual limbs in a system
+#checks status of all limbs in a system
 func checkstatus(system):
     var sys = getsystem(system)
     if sys == false:
@@ -74,3 +98,8 @@ func checkstatus(system):
                 if node.layers[l]["INTEGRITY"] > systemThreshold:
                     status = true
     return status && vital
+
+func processcirc(delta):
+    for l in _circsystem:
+        var node = get_node(l)
+    pass
