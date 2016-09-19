@@ -39,5 +39,5 @@ func _unhandled_input(ev):
             if ev.button_index == BUTTON_LEFT:
                 bodynode.damagelimb(bodynode._limbs.keys()[i], 0.5, 0.5)
             if ev.button_index == BUTTON_RIGHT:
-                bodynode.severlimb(bodynode._limbs.keys()[i])
+                bodynode.severlimb(bodynode._limbs.keys()[i], 0.5)
     pass

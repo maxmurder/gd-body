@@ -22,5 +22,5 @@
     },
     "GRASP" :{
         "DEPENDS" : ["MOTOR", "SENSORY", "CIRCULATION"]
-    },
+    }
 }

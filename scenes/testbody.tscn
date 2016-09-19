@@ -11,10 +11,12 @@
 script/script = ExtResource( 2 )
 materialFile = "res://data/materials.json"
 systemThreshold = 0.5
-vitalThresholdIntegrity = 1.0
-vitalThresholdDamage = 0.0
-vesselBleedRate = 0.5
-arteryBleedRate = 5.0
+vitalThresholdIntegrity = 0.5
+vitalThresholdDamage = 0.25
+vesselBleedRate = 10.0
+arteryBleedRate = 500.0
+blood = 1000.0
+bleedOutThreshHold = 500.0
 
 [node name="Label" type="Label" parent="."]
 

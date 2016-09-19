@@ -1,7 +1,7 @@
 extends Node
 
-export(String, FILE) var systemFile
-export(String, FILE) var flagFile
+export(String, FILE) var systemFile = "res://data/systems.json"
+export(String, FILE) var flagFile = "res://data/flags.json"
 
 onready var _systemdata = loadjson(systemFile)
 onready var _flagdata = loadjson(flagFile)
@@ -9,8 +9,8 @@ var _limbs = {}
 var _systems = {}
 
 func _ready():
-    _limbs = processbody(self)
-    _systems = processsystems(_limbs)
+    _limbs = setupbody(self)
+    _systems = setupsystems(_limbs)
     pass
 
 func getsystem(system):
@@ -18,7 +18,7 @@ func getsystem(system):
         return _systems[system]
     return false
 
-func processsystems(limbs):
+func setupsystems(limbs):
     if _systemdata == null:
         return
     var dict = {}
@@ -35,11 +35,11 @@ func processsystems(limbs):
             dict[s] = list
     return dict
 
-static func processbody(node):
+static func setupbody(node):
     var dict = {}
     for n in node.get_children():
         if n.get_child_count() > 0:
-            var d = processbody(n)
+            var d = setupbody(n)
             for k in d.keys():
                 dict[k] = {
                     NAME = d[k]["NAME"],

@@ -11,12 +11,6 @@ func detach():
     for n in self.get_children():
         n.detach()
 
-#func damage(damage):
-#    for l in layers.keys():
-#        layers[l]["INTEGRITY"] = layers[l]["INTEGRITY"] - damage / ( layers[l]["LAYER"] + material_layers[l]["hardness"] )
-#        layers[l]["DAMAGE"] = layers[l]["DAMAGE"] + damage / ( layers[l]["LAYER"] + material_layers[layers[l]]["hardness"] )
-#    pass
-
 static func processlayers(materials):
     var dict = {}
     for i in range(materials.size()):

@@ -17,10 +17,12 @@ movespeed = 100.0
 script/script = ExtResource( 3 )
 materialFile = "res://data/materials.json"
 systemThreshold = 0.5
-vitalThresholdIntegrity = 1.0
-vitalThresholdDamage = 0.0
-vesselBleedRate = 0.5
-arteryBleedRate = 5.0
+vitalThresholdIntegrity = 0.5
+vitalThresholdDamage = 0.25
+vesselBleedRate = 100.0
+arteryBleedRate = 1000.0
+blood = 1000.0
+bleedOutThreshHold = 500.0
 
 [node name="Sprite" type="Sprite" parent="."]
 
