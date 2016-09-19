@@ -15,8 +15,10 @@ vitalThresholdIntegrity = 0.5
 vitalThresholdDamage = 0.25
 vesselBleedRate = 10.0
 arteryBleedRate = 500.0
+vesselHealRate = 1.0
 blood = 1000.0
 bleedOutThreshHold = 500.0
+structureDetachThreshold = 0.1
 
 [node name="Label" type="Label" parent="."]
 

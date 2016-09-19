@@ -6,11 +6,6 @@ export var flags = StringArray()
 onready var layers = processlayers(material_layers)
 var attached = true
 
-func detach():
-    attached = false
-    for n in self.get_children():
-        n.detach()
-
 static func processlayers(materials):
     var dict = {}
     for i in range(materials.size()):

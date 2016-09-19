@@ -1,16 +1,17 @@
 extends "res://scripts/body.gd"
 
 export(String, FILE) var materialFile = "res://data/materials.json"
-export(float) var systemThreshold = 0.5
-export(float) var vitalThresholdIntegrity = 0.5
-export(float) var vitalThresholdDamage = 0.25
-export(float) var vesselBleedRate = 10.0
-export(float) var arteryBleedRate = 500.0
-export(float) var blood = 1000.0
-export(float) var bleedOutThreshHold = 500.0
+export(float) var systemThreshold = 0.5 #integrity/damage threshold for regular system components
+export(float) var vitalThresholdIntegrity = 0.5 #integrity threshold for vital components
+export(float) var vitalThresholdDamage = 0.25 #damage threshold for vital components
+export(float) var vesselBleedRate = 10.0 #bleed rate for VASCULAR materials
+export(float) var arteryBleedRate = 500.0 #bleed rate for ARTEREAL materials
+export(float) var vesselHealRate = 1.0 #heal rate for VASCULAR materials
+export(float) var blood = 1000.0 #amount of blood
+export(float) var bleedOutThreshHold = 500.0 #threshold for bleed out
+export(float) var structureDetachThreshold = 0.1 #STRUCTURE material integrity threshold for limb detact
 
 var _status = {}
-var _circsystem = {}
 const _limbscript = preload("res://scripts/limb.gd")
 onready var _materialdata = loadjson(materialFile)
 
@@ -18,7 +19,6 @@ func _ready():
     set_process(true)
     for s in _systems:
         _status[s] = checkstatus(s)
-    _circsystem = getsystem("CIRCULATION")
     pass
 
 #do damage to a limb
@@ -60,8 +60,8 @@ func applydamage(limb, damage):
         var d = damage
         if _materialdata.has(l):
             d =  damage / ( layers[l]["LAYER"] + _materialdata[l]["hardness"] )
-        layers[l]["INTEGRITY"] = layers[l]["INTEGRITY"] - d
-        layers[l]["DAMAGE"] = layers[l]["DAMAGE"] + d
+        layers[l]["INTEGRITY"] = max(layers[l]["INTEGRITY"] - d, 0)
+        layers[l]["DAMAGE"] = min(layers[l]["DAMAGE"] + d, 1)
     limb.layers = layers
     pass
 
@@ -99,20 +99,25 @@ func checkstatus(system):
             for l in node.layers:
                 if node.layers[l]["INTEGRITY"] < vitalThresholdIntegrity or node.layers[l]["DAMAGE"] > vitalThresholdDamage:
                     vital = false
-        if node.attached:
-            for l in node.layers:
-                if node.layers[l]["INTEGRITY"] > systemThreshold:
-                    status = true
+        status = checklimb(node)
     return status && vital
+
+#check status of an individual limb
+func checklimb(limb):
+    if limb.attached:
+        for l in limb.layers:
+            if limb.layers[l]["INTEGRITY"] > systemThreshold:
+                return true
+    return false
 
 func _process(delta):
     processsystems(delta)
-    print(blood)
     pass
 
 #system process function
 func processsystems(delta):
     processcirc(delta)
+    processstruc(delta)
     for s in _status.keys():
         _status[s] = checkstatus(s);
         if s == "CIRCULATION":
@@ -124,15 +129,34 @@ func processsystems(delta):
 func processcirc(delta):
     if !checksystem("CIRCULATION"):
         return
-    for limb in _circsystem:
+    for limb in getsystem("CIRCULATION"):
         var node = get_node(limb)
-        for layer in node.layers.keys():
-            if _materialdata.has(layer):
-                for f in _materialdata[layer].flags:
-                    if f == "VASCULAR":
-                        bleed(node.layers[layer]["DAMAGE"] * vesselBleedRate * delta)
-                    if f == "ARTERY":
-                        bleed(node.layers[layer]["DAMAGE"] * arteryBleedRate * delta)
+        if node.attached:
+            for layer in node.layers.keys():
+                if _materialdata.has(layer):
+                    for f in _materialdata[layer].flags:
+                        if f == "VASCULAR":
+                            bleed(node.layers[layer]["DAMAGE"] * vesselBleedRate * delta)
+                            if(node.layers[layer]["DAMAGE"] > 0):
+                                node.layers[layer]["DAMAGE"] = max(node.layers[layer]["DAMAGE"] - vesselHealRate * delta, 0)
+                        if f == "ARTERY":
+                            bleed(node.layers[layer]["DAMAGE"] * arteryBleedRate * delta)
+    pass
+
+#structure system process function
+func processstruc(delta):
+    if !checksystem("STRUCTURE"):
+        return
+    for limb in getsystem("STRUCTURE"):
+        var node = get_node(limb)
+        if node.attached:
+            for layer in node.layers.keys():
+                if _materialdata.has(layer):
+                    for f in _materialdata[layer].flags:
+                        if f == "STRUCTURE":
+                            if node.layers[layer]["INTEGRITY"] < structureDetachThreshold:
+                                detachlimb(node)
+                                print(node.layers[layer]["INTEGRITY"])
     pass
 
 func bleed(amount):

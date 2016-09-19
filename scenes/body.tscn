@@ -12,7 +12,7 @@ flagFile = "res://data/flags.json"
 [node name="body_lower" parent="." instance=ExtResource( 2 )]
 
 material_layers = StringArray( "SKIN", "MUSCLE", "BONE", "ARTERY", "NERVE" )
-flags = StringArray( "VASCULAR", "ARTEREAL" )
+flags = StringArray( "VASCULAR", "ARTEREAL", "STRUCTURE" )
 
 [node name="stomach" parent="body_lower" instance=ExtResource( 2 )]
 
@@ -23,19 +23,19 @@ flags = StringArray( "INTERNAL", "DIGESTION", "VASCULAR" )
 [node name="body_upper" parent="body_lower" instance=ExtResource( 2 )]
 
 material_layers = StringArray( "SKIN", "MUSCLE", "BONE", "ARTERY", "NERVE" )
-flags = StringArray( "VASCULAR", "ARTEREAL" )
+flags = StringArray( "VASCULAR", "ARTEREAL", "STRUCTURE" )
 
 [node name="neck" parent="body_lower/body_upper" instance=ExtResource( 2 )]
 
 size = 0.1
 material_layers = StringArray( "SKIN", "MUSCLE", "ARTERY", "BONE", "NERVE" )
-flags = StringArray( "VASCULAR", "ARTEREAL", "NERVOUS" )
+flags = StringArray( "VASCULAR", "ARTEREAL", "NERVOUS", "STRUCTURE" )
 
 [node name="head" parent="body_lower/body_upper/neck" instance=ExtResource( 2 )]
 
 size = 0.25
 material_layers = StringArray( "SKIN", "MUSCLE", "BONE" )
-flags = StringArray( "VASCULAR" )
+flags = StringArray( "VASCULAR", "STRUCTURE" )
 
 [node name="brain" parent="body_lower/body_upper/neck/head" instance=ExtResource( 2 )]
 
@@ -65,72 +65,72 @@ flags = StringArray( "VITAL", "ARTEREAL", "INTERNAL" )
 
 size = 0.25
 material_layers = StringArray( "SKIN", "MUSCLE", "ARTERY", "BONE", "NERVE" )
-flags = StringArray( "VASCULAR", "ARTEREAL" )
+flags = StringArray( "VASCULAR", "ARTEREAL", "STRUCTURE" )
 
 [node name="arm_lower_l" parent="body_lower/body_upper/arm_upper_l" instance=ExtResource( 2 )]
 
 size = 0.25
 material_layers = StringArray( "SKIN", "MUSCLE", "ARTERY", "BONE", "NERVE" )
-flags = StringArray( "VASCULAR", "ARTEREAL" )
+flags = StringArray( "VASCULAR", "ARTEREAL", "STRUCTURE" )
 
 [node name="hand_l" parent="body_lower/body_upper/arm_upper_l/arm_lower_l" instance=ExtResource( 2 )]
 
 size = 0.1
 material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
-flags = StringArray( "VASCULAR", "GRASP" )
+flags = StringArray( "VASCULAR", "GRASP", "STRUCTURE" )
 
 [node name="arm_upper_r" parent="body_lower/body_upper" instance=ExtResource( 2 )]
 
 size = 0.25
 material_layers = StringArray( "SKIN", "MUSCLE", "ARTERY", "BONE", "NERVE" )
-flags = StringArray( "VASCULAR", "ARTEREAL" )
+flags = StringArray( "VASCULAR", "ARTEREAL", "STRUCTURE" )
 
 [node name="arm_lower_r" parent="body_lower/body_upper/arm_upper_r" instance=ExtResource( 2 )]
 
 size = 0.25
 material_layers = StringArray( "SKIN", "MUSCLE", "ARTERY", "BONE", "NERVE" )
-flags = StringArray( "VASCULAR", "ARTEREAL" )
+flags = StringArray( "VASCULAR", "ARTEREAL", "STRUCTURE" )
 
 [node name="hand_r" parent="body_lower/body_upper/arm_upper_r/arm_lower_r" instance=ExtResource( 2 )]
 
 size = 0.1
 material_layers = StringArray( "SKIN", "MUSCLE", "NERVE", "BONE" )
-flags = StringArray( "VASCULAR", "GRASP" )
+flags = StringArray( "VASCULAR", "GRASP", "STRUCTURE" )
 
 [node name="leg_upper_l" parent="body_lower" instance=ExtResource( 2 )]
 
 size = 0.25
 material_layers = StringArray( "SKIN", "MUSCLE", "ARTERY", "BONE", "NERVE" )
-flags = StringArray( "VASCULAR", "ARTEREAL" )
+flags = StringArray( "VASCULAR", "ARTEREAL", "LOCOMOTION", "STRUCTURE" )
 
 [node name="leg_lower_l" parent="body_lower/leg_upper_l" instance=ExtResource( 2 )]
 
 size = 0.25
 material_layers = StringArray( "SKIN", "MUSCLE", "ARTERY", "BONE", "NERVE" )
-flags = StringArray( "VASCULAR", "ARTEREAL" )
+flags = StringArray( "VASCULAR", "ARTEREAL", "LOCOMOTION", "STRUCTURE" )
 
 [node name="foot_l" parent="body_lower/leg_upper_l/leg_lower_l" instance=ExtResource( 2 )]
 
 size = 0.1
 material_layers = StringArray( "SKIN", "MUSCLE", "BONE", "NERVE" )
-flags = StringArray( "VASCULAR", "LOCOMOTION" )
+flags = StringArray( "VASCULAR", "LOCOMOTION", "STRUCTURE" )
 
 [node name="leg_upper_r" parent="body_lower" instance=ExtResource( 2 )]
 
 size = 0.25
 material_layers = StringArray( "SKIN", "MUSCLE", "ARTERY", "BONE", "NERVE" )
-flags = StringArray( "VASCULAR", "ARTEREAL" )
+flags = StringArray( "VASCULAR", "ARTEREAL", "LOCOMOTION", "STRUCTURE" )
 
 [node name="leg_lower_r" parent="body_lower/leg_upper_r" instance=ExtResource( 2 )]
 
 size = 0.25
 material_layers = StringArray( "SKIN", "MUSCLE", "ARTERY", "BONE", "NERVE" )
-flags = StringArray( "VASCULAR", "ARTEREAL" )
+flags = StringArray( "VASCULAR", "ARTEREAL", "LOCOMOTION", "STRUCTURE" )
 
 [node name="foot_r" parent="body_lower/leg_upper_r/leg_lower_r" instance=ExtResource( 2 )]
 
 size = 0.1
 material_layers = StringArray( "SKIN", "MUSCLE", "BONE", "NERVE" )
-flags = StringArray( "VASCULAR", "LOCOMOTION" )
+flags = StringArray( "VASCULAR", "LOCOMOTION", "STRUCTURE" )
 
 

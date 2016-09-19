@@ -37,8 +37,7 @@
     },
     "GRASP" : {
         "SYSTEMS" : [
-            "GRASP",
-            "LOCOMOTION"
+            "GRASP"
         ]
     },
     "DIGESTION" : {
@@ -46,5 +45,9 @@
             "DIGESTIVE"
         ]
     },
-    "STRUCTURE" : {}
+    "STRUCTURE" : {
+        "SYSTEMS" : [
+            "STRUCTURE"
+        ]
+    }
 }

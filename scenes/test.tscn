@@ -16,6 +16,5 @@ margin/bottom = 256.0
 [node name="player" parent="." instance=ExtResource( 1 )]
 
 transform/pos = Vector2( 128.674, 131.368 )
-body = null
 
 

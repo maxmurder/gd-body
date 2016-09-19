@@ -18,9 +18,12 @@
         "DEPENDS" : ["MOTOR", "CIRCULATION"]
     },
     "LOCOMOTION" : {
-        "DEPENDS" : ["MOTOR", "SENSORY", "CIRCULATION"]
+        "DEPENDS" : ["MOTOR", "SENSORY", "CIRCULATION", "STRUCTURE"]
     },
     "GRASP" :{
-        "DEPENDS" : ["MOTOR", "SENSORY", "CIRCULATION"]
+        "DEPENDS" : ["MOTOR", "SENSORY", "CIRCULATION", "STRUCTURE"]
+    },
+    "STRUCTURE" :{
+        "DEPENDS" : []
     }
 }
