@@ -14,11 +14,9 @@ func _input_event(viewport, event, shape_idx):
     if event.is_pressed():
         if event.type == InputEvent.MOUSE_BUTTON:
             if event.button_index == BUTTON_LEFT:
-                print(limb)
                 _bodynode.damagelimb(_limbnode.get_path(), 1, 0.5)
             if event.button_index == BUTTON_RIGHT:
-                print(limb)
-                _bodynode.severlimb(_limbnode.get_path(), 0.5)
+                _bodynode.severlimb(_limbnode.get_path(), 1)
     pass
 
 func _process(delta):

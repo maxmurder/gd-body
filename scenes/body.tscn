@@ -18,12 +18,54 @@ flags = StringArray( "VASCULAR", "ARTEREAL", "STRUCTURE" )
 
 size = 0.25
 material_layers = StringArray( "SKIN", "MUSCLE" )
-flags = StringArray( "INTERNAL", "DIGESTION", "VASCULAR" )
+flags = StringArray( "INTERNAL", "DIGESTION", "VITAL" )
+
+[node name="guts" parent="body_lower" instance=ExtResource( 2 )]
+
+size = 0.25
+material_layers = StringArray( "SKIN", "MUSCLE", "ARTERY" )
+flags = StringArray( "INTERNAL", "ARTEREAL", "VASCULAR" )
+
+[node name="kidney_l" parent="body_lower" instance=ExtResource( 2 )]
+
+size = 0.1
+material_layers = StringArray( "MUSCLE", "ARTERY" )
+flags = StringArray( "INTERNAL", "ARTEREAL", "VASCULAR" )
+
+[node name="kidney_r" parent="body_lower" instance=ExtResource( 2 )]
+
+size = 0.1
+material_layers = StringArray( "MUSCLE", "ARTERY" )
+flags = StringArray( "INTERNAL", "ARTEREAL", "VASCULAR" )
+
+[node name="liver" parent="body_lower" instance=ExtResource( 2 )]
+
+size = 0.1
+material_layers = StringArray( "MUSCLE", "ARTERY" )
+flags = StringArray( "INTERNAL", "ARTEREAL", "VASCULAR" )
 
 [node name="body_upper" parent="body_lower" instance=ExtResource( 2 )]
 
 material_layers = StringArray( "SKIN", "MUSCLE", "BONE", "ARTERY", "NERVE" )
 flags = StringArray( "VASCULAR", "ARTEREAL", "STRUCTURE" )
+
+[node name="lung_l" parent="body_lower/body_upper" instance=ExtResource( 2 )]
+
+size = 0.25
+material_layers = StringArray( "MUSCLE", "ARTERY" )
+flags = StringArray( "RESPRITORY", "VASCULAR", "ARTEREAL", "INTERNAL" )
+
+[node name="lung_r" parent="body_lower/body_upper" instance=ExtResource( 2 )]
+
+size = 0.25
+material_layers = StringArray( "MUSCLE", "ARTERY" )
+flags = StringArray( "RESPRITORY", "VASCULAR", "ARTEREAL", "INTERNAL" )
+
+[node name="heart" parent="body_lower/body_upper" instance=ExtResource( 2 )]
+
+size = 0.1
+material_layers = StringArray( "MUSCLE", "ARTERY" )
+flags = StringArray( "VITAL", "ARTEREAL", "INTERNAL" )
 
 [node name="neck" parent="body_lower/body_upper" instance=ExtResource( 2 )]
 
@@ -42,24 +84,6 @@ flags = StringArray( "VASCULAR", "STRUCTURE" )
 size = 0.1
 material_layers = StringArray( "NERVE", "ARTERY" )
 flags = StringArray( "VITAL", "INTERNAL", "NERVOUS", "VASCULAR", "ARTEREAL", "COGNITIVE" )
-
-[node name="lung_l" parent="body_lower/body_upper" instance=ExtResource( 2 )]
-
-size = 0.1
-material_layers = StringArray( "MUSCLE", "ARTERY" )
-flags = StringArray( "RESPRITORY", "VASCULAR", "ARTEREAL" )
-
-[node name="lung_r" parent="body_lower/body_upper" instance=ExtResource( 2 )]
-
-size = 0.1
-material_layers = StringArray( "MUSCLE", "ARTERY" )
-flags = StringArray( "RESPRITORY", "VASCULAR", "ARTEREAL" )
-
-[node name="heart" parent="body_lower/body_upper" instance=ExtResource( 2 )]
-
-size = 0.1
-material_layers = StringArray( "MUSCLE", "ARTERY" )
-flags = StringArray( "VITAL", "ARTEREAL", "INTERNAL" )
 
 [node name="arm_upper_l" parent="body_lower/body_upper" instance=ExtResource( 2 )]
 

@@ -5,15 +5,18 @@ export(float) var systemThreshold = 0.5 #integrity/damage threshold for regular 
 export(float) var vitalThresholdIntegrity = 0.5 #integrity threshold for vital components
 export(float) var vitalThresholdDamage = 0.25 #damage threshold for vital components
 export(float) var vesselBleedRate = 10.0 #bleed rate for VASCULAR materials
-export(float) var arteryBleedRate = 500.0 #bleed rate for ARTEREAL materials
-export(float) var vesselHealRate = 1.0 #heal rate for VASCULAR materials
+export(float) var arteryBleedRate = 50.0 #bleed rate for ARTEREAL materials
+export(float) var vesselHealRate = 0.5 #heal rate for VASCULAR materials
+export(float) var arteryHealRate = 0.0 #heal rate for ARTERY materials
 export(float) var blood = 1000.0 #amount of blood
-export(float) var bleedOutThreshHold = 500.0 #threshold for bleed out
+export(float) var bleedOutThreshHold = 0.0 #threshold for bleed out
+export(float) var bloodRegenRate = 1.0 #blood regeneration rate
 export(float) var structureDetachThreshold = 0.1 #STRUCTURE material integrity threshold for limb detact
 
 var _status = {}
 const _limbscript = preload("res://scripts/limb.gd")
 onready var _materialdata = loadjson(materialFile)
+onready var _maxblood = blood
 
 func _ready():
     set_process(true)
@@ -27,6 +30,7 @@ func _ready():
 func damagelimb(limb, damage, falloff = 0):
     if damage <= 0:
         return
+    print(limb)
     var node = get_node(limb)
     if node extends _limbscript:
         applydamage(node, damage)
@@ -47,6 +51,7 @@ func damagelimb(limb, damage, falloff = 0):
 func severlimb(limb, damage = 0, falloff = 0):
     var node = get_node(limb)
     var parent = node.get_parent()
+    print(limb)
     if node extends _limbscript:
         detachlimb(node)
     if parent extends _limbscript:
@@ -129,6 +134,8 @@ func processsystems(delta):
 func processcirc(delta):
     if !checksystem("CIRCULATION"):
         return
+    if blood < _maxblood:
+        blood += bloodRegenRate * delta;
     for limb in getsystem("CIRCULATION"):
         var node = get_node(limb)
         if node.attached:
@@ -139,8 +146,10 @@ func processcirc(delta):
                             bleed(node.layers[layer]["DAMAGE"] * vesselBleedRate * delta)
                             if(node.layers[layer]["DAMAGE"] > 0):
                                 node.layers[layer]["DAMAGE"] = max(node.layers[layer]["DAMAGE"] - vesselHealRate * delta, 0)
-                        if f == "ARTERY":
+                        if f == "ARTEREAL":
                             bleed(node.layers[layer]["DAMAGE"] * arteryBleedRate * delta)
+                            if(node.layers[layer]["DAMAGE"] > 0):
+                                node.layers[layer]["DAMAGE"] = max(node.layers[layer]["DAMAGE"] - arteryHealRate * delta, 0)
     pass
 
 #structure system process function
