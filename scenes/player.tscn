@@ -1,19 +1,69 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=15 format=1]
 
 [ext_resource path="res://scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/body.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/livingbody.gd" type="Script" id=3]
-[ext_resource path="res://image/checker.png" type="Texture" id=4]
+[ext_resource path="res://scripts/playerlimb.gd" type="Script" id=4]
+[ext_resource path="res://image/checker.png" type="Texture" id=5]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 10.0
+height = 20.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 10.0
+height = 20.0
+
+[sub_resource type="CircleShape2D" id=3]
+
+custom_solver_bias = 0.0
+radius = 10.0
+
+[sub_resource type="CapsuleShape2D" id=4]
+
+custom_solver_bias = 0.0
+radius = 10.0
+height = 20.0
+
+[sub_resource type="CircleShape2D" id=5]
+
+custom_solver_bias = 0.0
+radius = 10.0
+
+[sub_resource type="CapsuleShape2D" id=6]
+
+custom_solver_bias = 0.0
+radius = 10.0
+height = 20.0
+
+[sub_resource type="CircleShape2D" id=7]
+
+custom_solver_bias = 0.0
+radius = 10.0
+
+[sub_resource type="CircleShape2D" id=8]
+
+custom_solver_bias = 0.0
+radius = 10.0
+
+[sub_resource type="CircleShape2D" id=9]
+
+custom_solver_bias = 0.0
+radius = 10.0
 
 [node name="player" type="Node2D"]
 
-transform/pos = Vector2( 1, 0 )
 script/script = ExtResource( 1 )
 body = NodePath("body")
 movespeed = 100.0
 
 [node name="body" parent="." instance=ExtResource( 2 )]
 
+editor/display_folded = true
 script/script = ExtResource( 3 )
 materialFile = "res://data/materials.json"
 systemThreshold = 0.5
@@ -26,10 +76,476 @@ blood = 1000.0
 bleedOutThreshHold = 500.0
 structureDetachThreshold = 0.1
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="body_lower" parent="body"]
 
-texture = ExtResource( 4 )
+editor/display_folded = true
+
+[node name="lower_body" type="KinematicBody2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 4 )
+body = NodePath("../body")
+limb = NodePath("../body/body_lower")
+
+[node name="sprite_lower_body" type="Sprite" parent="lower_body"]
+
+texture = ExtResource( 5 )
 region = true
-region_rect = Rect2( 0, 0, 64, 64 )
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="collider_lowe_body" type="CollisionShape2D" parent="lower_body"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="upper_body" type="KinematicBody2D" parent="lower_body"]
+
+transform/pos = Vector2( 0, -16 )
+transform/rot = 4.18883e-05
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, -16 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 4 )
+__meta__ = { "_edit_bone_":true, "_edit_ik_":true }
+body = NodePath("../../body")
+limb = NodePath("../../body/body_lower/body_upper")
+
+[node name="sprite_upper_body" type="Sprite" parent="lower_body/upper_body"]
+
+transform/rot = -4.18883e-05
+texture = ExtResource( 5 )
+offset = Vector2( 0, -16 )
+region = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="collider_upper_body" type="CollisionShape2D" parent="lower_body/upper_body"]
+
+transform/pos = Vector2( 0, -16 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="head" type="KinematicBody2D" parent="lower_body/upper_body"]
+
+editor/display_folded = true
+transform/pos = Vector2( 0, -32 )
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -1.19209e-07, -8 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 4 )
+__meta__ = { "_edit_bone_":true }
+body = NodePath("../../../body")
+limb = NodePath("../../../body/body_lower/body_upper/neck/head")
+
+[node name="sprite_upper_body1" type="Sprite" parent="lower_body/upper_body/head"]
+
+transform/rot = -4.18883e-05
+texture = ExtResource( 5 )
+offset = Vector2( 0, -8 )
+region = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="collider_head" type="CollisionShape2D" parent="lower_body/upper_body/head"]
+
+transform/pos = Vector2( -1.19209e-07, -8 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 0
+
+[node name="end_head" type="Position2D" parent="lower_body/upper_body/head"]
+
+transform/pos = Vector2( 0, -16 )
+__meta__ = { "_edit_bone_":true }
+
+[node name="arm_upper_r" type="KinematicBody2D" parent="lower_body/upper_body"]
+
+transform/pos = Vector2( 16, -16 )
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, 16, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 4 )
+__meta__ = { "_edit_bone_":true, "_edit_ik_":true }
+body = NodePath("../../../body")
+limb = NodePath("../../../body/body_lower/body_upper/arm_upper_r")
+
+[node name="sprite_arm_upper_r" type="Sprite" parent="lower_body/upper_body/arm_upper_r"]
+
+texture = ExtResource( 5 )
+offset = Vector2( 16, 0 )
+region = true
+region_rect = Rect2( 0, 0, 32, 16 )
+
+[node name="collider_arm_upper_r" type="CollisionShape2D" parent="lower_body/upper_body/arm_upper_r"]
+
+transform/pos = Vector2( 16, 0 )
+transform/rot = 90.0
+shape = SubResource( 4 )
+trigger = false
+_update_shape_index = 0
+
+[node name="arm_lower_r" type="KinematicBody2D" parent="lower_body/upper_body/arm_upper_r"]
+
+editor/display_folded = true
+transform/pos = Vector2( 32, 0 )
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, 16, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 4 )
+__meta__ = { "_edit_bone_":true }
+body = NodePath("../../../../body")
+limb = NodePath("../../../../body/body_lower/body_upper/arm_upper_r/arm_lower_r")
+
+[node name="sprite_arm_lower_r" type="Sprite" parent="lower_body/upper_body/arm_upper_r/arm_lower_r"]
+
+texture = ExtResource( 5 )
+offset = Vector2( 16, 0 )
+region = true
+region_rect = Rect2( 0, 0, 32, 16 )
+
+[node name="collider_arm_lower_r" type="CollisionShape2D" parent="lower_body/upper_body/arm_upper_r/arm_lower_r"]
+
+transform/pos = Vector2( 16, 0 )
+transform/rot = 90.0
+shape = SubResource( 4 )
+trigger = false
+_update_shape_index = 0
+
+[node name="hand_r" type="KinematicBody2D" parent="lower_body/upper_body/arm_upper_r/arm_lower_r"]
+
+transform/pos = Vector2( 32, 0 )
+input/pickable = true
+shapes/0/shape = SubResource( 5 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 8, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 4 )
+__meta__ = { "_edit_bone_":true }
+body = NodePath("../../../../../body")
+limb = NodePath("../../../../../body/body_lower/body_upper/arm_upper_r/arm_lower_r/hand_r")
+
+[node name="sprite_hand_r" type="Sprite" parent="lower_body/upper_body/arm_upper_r/arm_lower_r/hand_r"]
+
+texture = ExtResource( 5 )
+offset = Vector2( 8, 0 )
+region = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="collider_hard_r" type="CollisionShape2D" parent="lower_body/upper_body/arm_upper_r/arm_lower_r/hand_r"]
+
+transform/pos = Vector2( 8, 0 )
+shape = SubResource( 5 )
+trigger = false
+_update_shape_index = 0
+
+[node name="end_hand_r" type="Position2D" parent="lower_body/upper_body/arm_upper_r/arm_lower_r/hand_r"]
+
+transform/pos = Vector2( 16, 0 )
+__meta__ = { "_edit_bone_":true }
+
+[node name="arm_upper_l" type="KinematicBody2D" parent="lower_body/upper_body"]
+
+transform/pos = Vector2( -16, -16 )
+input/pickable = true
+shapes/0/shape = SubResource( 6 )
+shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, -16, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 4 )
+__meta__ = { "_edit_bone_":true, "_edit_ik_":true }
+body = NodePath("../../../body")
+limb = NodePath("../../../body/body_lower/body_upper/arm_upper_l")
+
+[node name="sprite_arm_upper_l" type="Sprite" parent="lower_body/upper_body/arm_upper_l"]
+
+texture = ExtResource( 5 )
+offset = Vector2( -16, 0 )
+region = true
+region_rect = Rect2( 16, 0, 32, 16 )
+
+[node name="collision_arm_upper_l" type="CollisionShape2D" parent="lower_body/upper_body/arm_upper_l"]
+
+transform/pos = Vector2( -16, 0 )
+transform/rot = 90.0
+shape = SubResource( 6 )
+trigger = false
+_update_shape_index = 0
+
+[node name="arm_lower_l" type="KinematicBody2D" parent="lower_body/upper_body/arm_upper_l"]
+
+transform/pos = Vector2( -32, 0 )
+input/pickable = true
+shapes/0/shape = SubResource( 6 )
+shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, -16, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 4 )
+__meta__ = { "_edit_bone_":true }
+body = NodePath("../../../../body")
+limb = NodePath("../../../../body/body_lower/body_upper/arm_upper_l/arm_lower_l")
+
+[node name="sprite_arm_lower_l" type="Sprite" parent="lower_body/upper_body/arm_upper_l/arm_lower_l"]
+
+texture = ExtResource( 5 )
+offset = Vector2( -16, 0 )
+region = true
+region_rect = Rect2( 16, 0, 32, 16 )
+
+[node name="collision_arm_lower_l" type="CollisionShape2D" parent="lower_body/upper_body/arm_upper_l/arm_lower_l"]
+
+transform/pos = Vector2( -16, 0 )
+transform/rot = 90.0
+shape = SubResource( 6 )
+trigger = false
+_update_shape_index = 0
+
+[node name="hand_l" type="KinematicBody2D" parent="lower_body/upper_body/arm_upper_l/arm_lower_l"]
+
+transform/pos = Vector2( -32, 0 )
+input/pickable = true
+shapes/0/shape = SubResource( 7 )
+shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, -8, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 4 )
+__meta__ = { "_edit_bone_":true }
+body = NodePath("../../../../../body")
+limb = NodePath("../../../../../body/body_lower/body_upper/arm_upper_l/arm_lower_l/hand_l")
+
+[node name="sprite_hand_l" type="Sprite" parent="lower_body/upper_body/arm_upper_l/arm_lower_l/hand_l"]
+
+texture = ExtResource( 5 )
+offset = Vector2( -8, 0 )
+region = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="collision_hand_l" type="CollisionShape2D" parent="lower_body/upper_body/arm_upper_l/arm_lower_l/hand_l"]
+
+transform/pos = Vector2( -8, 0 )
+transform/rot = 90.0
+shape = SubResource( 7 )
+trigger = false
+_update_shape_index = 0
+
+[node name="end_hand_l" type="Position2D" parent="lower_body/upper_body/arm_upper_l/arm_lower_l/hand_l"]
+
+transform/pos = Vector2( -16, 0 )
+__meta__ = { "_edit_bone_":true }
+
+[node name="leg_upper_r" type="KinematicBody2D" parent="lower_body"]
+
+transform/pos = Vector2( 8, 16 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 16 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 4 )
+__meta__ = { "_edit_bone_":true, "_edit_ik_":true }
+body = NodePath("../../body")
+limb = NodePath("../../body/body_lower/leg_upper_r")
+
+[node name="sprite_leg_upper_r" type="Sprite" parent="lower_body/leg_upper_r"]
+
+texture = ExtResource( 5 )
+offset = Vector2( 0, 16 )
+region = true
+region_rect = Rect2( 0, 0, 16, 32 )
+
+[node name="collider_leg_upper_r" type="CollisionShape2D" parent="lower_body/leg_upper_r"]
+
+transform/pos = Vector2( 0, 16 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="leg_lower_r" type="KinematicBody2D" parent="lower_body/leg_upper_r"]
+
+transform/pos = Vector2( 0, 32 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 16 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 4 )
+__meta__ = { "_edit_bone_":true }
+body = NodePath("../../../body")
+limb = NodePath("../../../body/body_lower/leg_upper_r/leg_lower_r")
+
+[node name="sprite_leg_lower_r" type="Sprite" parent="lower_body/leg_upper_r/leg_lower_r"]
+
+texture = ExtResource( 5 )
+offset = Vector2( 0, 16 )
+region = true
+region_rect = Rect2( 0, 0, 16, 32 )
+
+[node name="collider_leg_lower_r" type="CollisionShape2D" parent="lower_body/leg_upper_r/leg_lower_r"]
+
+transform/pos = Vector2( 0, 16 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="foot_r" type="KinematicBody2D" parent="lower_body/leg_upper_r/leg_lower_r"]
+
+transform/pos = Vector2( 0, 32 )
+input/pickable = true
+shapes/0/shape = SubResource( 8 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 8 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 4 )
+__meta__ = { "_edit_bone_":true }
+body = NodePath("../../../../body")
+limb = NodePath("../../../../body/body_lower/leg_upper_r/leg_lower_r/foot_r")
+
+[node name="sprite_leg_lower_r1" type="Sprite" parent="lower_body/leg_upper_r/leg_lower_r/foot_r"]
+
+texture = ExtResource( 5 )
+offset = Vector2( 0, 8 )
+region = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="collider_leg_lower_r1" type="CollisionShape2D" parent="lower_body/leg_upper_r/leg_lower_r/foot_r"]
+
+transform/pos = Vector2( 0, 8 )
+shape = SubResource( 8 )
+trigger = false
+_update_shape_index = 0
+
+[node name="end_foot_r" type="Position2D" parent="lower_body/leg_upper_r/leg_lower_r/foot_r"]
+
+visibility/behind_parent = true
+transform/pos = Vector2( 0, 16 )
+__meta__ = { "_edit_bone_":true }
+
+[node name="leg_upper_l" type="KinematicBody2D" parent="lower_body"]
+
+transform/pos = Vector2( -8, 16 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 16 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 4 )
+__meta__ = { "_edit_bone_":true, "_edit_ik_":true }
+body = NodePath("../../body")
+limb = NodePath("../../body/body_lower/leg_upper_l")
+
+[node name="sprite_leg_upper_l" type="Sprite" parent="lower_body/leg_upper_l"]
+
+texture = ExtResource( 5 )
+offset = Vector2( 0, 16 )
+region = true
+region_rect = Rect2( 0, 0, 16, 32 )
+
+[node name="collider_leg_upper_l" type="CollisionShape2D" parent="lower_body/leg_upper_l"]
+
+transform/pos = Vector2( 0, 16 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="leg_lower_l" type="KinematicBody2D" parent="lower_body/leg_upper_l"]
+
+transform/pos = Vector2( 0, 32 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 16 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 4 )
+__meta__ = { "_edit_bone_":true }
+body = NodePath("../../../body")
+limb = NodePath("../../../body/body_lower/leg_upper_l/leg_lower_l")
+
+[node name="sprite_leg_lower_l" type="Sprite" parent="lower_body/leg_upper_l/leg_lower_l"]
+
+texture = ExtResource( 5 )
+offset = Vector2( 0, 16 )
+region = true
+region_rect = Rect2( 0, 0, 16, 32 )
+
+[node name="collider_leg_lower_l" type="CollisionShape2D" parent="lower_body/leg_upper_l/leg_lower_l"]
+
+transform/pos = Vector2( 0, 16 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="foot_l" type="KinematicBody2D" parent="lower_body/leg_upper_l/leg_lower_l"]
+
+transform/pos = Vector2( 0, 32 )
+input/pickable = true
+shapes/0/shape = SubResource( 9 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 8 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 4 )
+__meta__ = { "_edit_bone_":true }
+body = NodePath("../../../../body")
+limb = NodePath("../../../../body/body_lower/leg_upper_l/leg_lower_l/foot_l")
+
+[node name="sprite_foot_l" type="Sprite" parent="lower_body/leg_upper_l/leg_lower_l/foot_l"]
+
+texture = ExtResource( 5 )
+offset = Vector2( 0, 8 )
+region = true
+region_rect = Rect2( 16, 0, 16, 16 )
+
+[node name="collider_foot_l" type="CollisionShape2D" parent="lower_body/leg_upper_l/leg_lower_l/foot_l"]
+
+transform/pos = Vector2( 0, 8 )
+shape = SubResource( 9 )
+trigger = false
+_update_shape_index = 0
+
+[node name="end_foot_l" type="Position2D" parent="lower_body/leg_upper_l/leg_lower_l/foot_l"]
+
+transform/pos = Vector2( 0, 16 )
+__meta__ = { "_edit_bone_":true }
 
 
+[editable path="body"]

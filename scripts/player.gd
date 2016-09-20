@@ -8,7 +8,7 @@ var bodynode
 
 func _ready():
     set_process(true)
-    set_process_input(true)
+    #set_process_input(true)
     bodynode = get_node(body)
     pass
 
@@ -34,17 +34,5 @@ func move(delta):
         velocity.x += movespeed
     if Input.is_action_pressed("move_left"):
         velocity.x -= movespeed
-    self.translate(velocity * (float(n) / float(i)) * delta)
-    pass
-
-func _input(event):
-    if event.type == InputEvent.MOUSE_BUTTON:
-        if event.is_pressed():
-            randomize()
-            var i = randi() % bodynode._limbs.keys().size()
-            print(bodynode._limbs.keys()[i])
-            if event.button_index == BUTTON_LEFT:
-                bodynode.damagelimb(bodynode._limbs.keys()[i], 1, 0.5)
-            if event.button_index == BUTTON_RIGHT:
-                bodynode.severlimb(bodynode._limbs.keys()[i], 0.5)
+    translate(velocity * (float(n) / float(i)) * delta)
     pass

@@ -99,7 +99,7 @@ func checkstatus(system):
             for l in node.layers:
                 if node.layers[l]["INTEGRITY"] < vitalThresholdIntegrity or node.layers[l]["DAMAGE"] > vitalThresholdDamage:
                     vital = false
-        status = checklimb(node)
+        status = status || checklimb(node)
     return status && vital
 
 #check status of an individual limb
@@ -156,7 +156,6 @@ func processstruc(delta):
                         if f == "STRUCTURE":
                             if node.layers[layer]["INTEGRITY"] < structureDetachThreshold:
                                 detachlimb(node)
-                                print(node.layers[layer]["INTEGRITY"])
     pass
 
 func bleed(amount):
