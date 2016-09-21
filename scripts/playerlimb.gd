@@ -24,7 +24,7 @@ func _input_event(viewport, event, shape_idx):
 func _process(delta):
     if !_limbnode.attached:
         if _attach:
-            var l = generateragdoll(self)
+            var l = generatechunk(self)
             l.set_pos(get_global_pos())
             l.set_rot(get_rot())
             _attach = false
@@ -33,21 +33,40 @@ func _process(delta):
         set_process(false)
     pass
 
-func generateragdoll(lmb, parent = null):
+func generatechunk(lmb):
     var obj = RigidBody2D.new()
+    obj.set_pos(lmb.get_global_pos())
+    obj.set_rot(lmb.get_rot())
     for i in range(lmb.get_shape_count()):
         obj.add_shape(lmb.get_shape(i), lmb.get_shape_transform(i))
+    get_tree().get_root().add_child(obj)
+    for n in lmb.get_children():
+        if n extends Sprite:
+            var i = n.duplicate(true)
+            obj.add_child(i)
+        if n extends get_script():
+            if n._attach:
+                var i = generatechunk(n)
+                n._attach = false
+    return obj
+
+func generateragdoll(lmb, parent = null):
+    var obj = RigidBody2D.new()
+    obj.set_mode(1)
     if parent != null:
         parent.add_child(obj)
         obj.set_pos(lmb.get_pos())
         obj.set_rot(lmb.get_rot())
         var j = PinJoint2D.new()
-        obj.add_child(j)
-        #j.set_pos(lmb.length)
-        j.set_node_a(parent.get_path())
-        j.set_node_b(obj.get_path())
+        get_tree().get_root().add_child(j)
+        j.set_pos(parent.get_global_pos())
+        j.set_node_b(parent.get_path())
+        j.set_node_a(obj.get_path())
     else:
         get_tree().get_root().add_child(obj)
+        obj.set_rot(lmb.get_rot())
+    for i in range(lmb.get_shape_count()):
+        obj.add_shape(lmb.get_shape(i), lmb.get_shape_transform(i))
     for n in lmb.get_children():
         if n extends Sprite:
             var i = n.duplicate(true)
@@ -56,6 +75,7 @@ func generateragdoll(lmb, parent = null):
             if n._attach:
                 var i = generateragdoll(n, obj)
                 n._attach = false
+    obj.set_mode(0)
     return obj
 
 func deactivate(lmb):
