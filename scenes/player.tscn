@@ -1,10 +1,13 @@
 [gd_scene load_steps=18 format=1]
 
-[ext_resource path="res://scripts/player.gd" type="Script" id=1]
+[ext_resource path="res://scripts/examples/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/body.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scripts/livingbody.gd" type="Script" id=3]
-[ext_resource path="res://scripts/playerlimb.gd" type="Script" id=4]
+[ext_resource path="res://scripts/examples/livingbody.gd" type="Script" id=3]
+[ext_resource path="res://scripts/examples/kinematiclimb.gd" type="Script" id=4]
 [ext_resource path="res://image/checker.png" type="Texture" id=5]
+
+
+
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -645,6 +648,7 @@ script/source = ""
 
 [node name="player" type="Node2D"]
 
+editor/display_folded = true
 script/script = ExtResource( 1 )
 body = NodePath("body")
 anim = NodePath("player_anim")
@@ -679,7 +683,6 @@ collision/margin = 0.08
 script/script = ExtResource( 4 )
 body = NodePath("../body")
 limb = NodePath("../body/body_lower")
-length = Vector2( 0, 16 )
 
 [node name="sprite_lower_body" type="Sprite" parent="lower_body"]
 
@@ -708,7 +711,6 @@ script/script = ExtResource( 4 )
 __meta__ = { "_edit_bone_":true, "_edit_ik_":true }
 body = NodePath("../../body")
 limb = NodePath("../../body/body_lower/body_upper")
-length = Vector2( 0, 16 )
 
 [node name="sprite_upper_body" type="Sprite" parent="lower_body/upper_body"]
 
@@ -740,7 +742,6 @@ script/script = ExtResource( 4 )
 __meta__ = { "_edit_bone_":true }
 body = NodePath("../../../body")
 limb = NodePath("../../../body/body_lower/body_upper/neck/head")
-length = Vector2( 0, 16 )
 
 [node name="sprite_upper_body1" type="Sprite" parent="lower_body/upper_body/head"]
 
@@ -764,6 +765,7 @@ __meta__ = { "_edit_bone_":true }
 
 [node name="arm_upper_r" type="KinematicBody2D" parent="lower_body/upper_body"]
 
+editor/display_folded = true
 transform/pos = Vector2( 16, -16 )
 input/pickable = true
 shapes/0/shape = SubResource( 4 )
@@ -776,7 +778,6 @@ script/script = ExtResource( 4 )
 __meta__ = { "_edit_bone_":true, "_edit_ik_":true }
 body = NodePath("../../../body")
 limb = NodePath("../../../body/body_lower/body_upper/arm_upper_r")
-length = Vector2( -16, 0 )
 
 [node name="sprite_arm_upper_r" type="Sprite" parent="lower_body/upper_body/arm_upper_r"]
 
@@ -807,7 +808,6 @@ script/script = ExtResource( 4 )
 __meta__ = { "_edit_bone_":true }
 body = NodePath("../../../../body")
 limb = NodePath("../../../../body/body_lower/body_upper/arm_upper_r/arm_lower_r")
-length = Vector2( -16, 0 )
 
 [node name="sprite_arm_lower_r" type="Sprite" parent="lower_body/upper_body/arm_upper_r/arm_lower_r"]
 
@@ -838,7 +838,6 @@ script/script = ExtResource( 4 )
 __meta__ = { "_edit_bone_":true }
 body = NodePath("../../../../../body")
 limb = NodePath("../../../../../body/body_lower/body_upper/arm_upper_r/arm_lower_r/hand_r")
-length = Vector2( -8, 0 )
 
 [node name="sprite_hand_r" type="Sprite" parent="lower_body/upper_body/arm_upper_r/arm_lower_r/hand_r"]
 
@@ -874,7 +873,6 @@ script/script = ExtResource( 4 )
 __meta__ = { "_edit_bone_":true, "_edit_ik_":true }
 body = NodePath("../../../body")
 limb = NodePath("../../../body/body_lower/body_upper/arm_upper_l")
-length = Vector2( -16, 0 )
 
 [node name="sprite_arm_upper_l" type="Sprite" parent="lower_body/upper_body/arm_upper_l"]
 
@@ -905,7 +903,6 @@ script/script = ExtResource( 4 )
 __meta__ = { "_edit_bone_":true }
 body = NodePath("../../../../body")
 limb = NodePath("../../../../body/body_lower/body_upper/arm_upper_l/arm_lower_l")
-length = Vector2( -16, 0 )
 
 [node name="sprite_arm_lower_l" type="Sprite" parent="lower_body/upper_body/arm_upper_l/arm_lower_l"]
 
@@ -925,7 +922,6 @@ _update_shape_index = 0
 [node name="hand_l" type="KinematicBody2D" parent="lower_body/upper_body/arm_upper_l/arm_lower_l"]
 
 transform/pos = Vector2( -32, 0 )
-transform/scale = Vector2( 1, 1 )
 input/pickable = true
 shapes/0/shape = SubResource( 7 )
 shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, -8, 0 )
@@ -937,7 +933,6 @@ script/script = ExtResource( 4 )
 __meta__ = { "_edit_bone_":true }
 body = NodePath("../../../../../body")
 limb = NodePath("../../../../../body/body_lower/body_upper/arm_upper_l/arm_lower_l/hand_l")
-length = Vector2( -8, 0 )
 
 [node name="sprite_hand_l" type="Sprite" parent="lower_body/upper_body/arm_upper_l/arm_lower_l/hand_l"]
 
@@ -974,7 +969,6 @@ script/script = ExtResource( 4 )
 __meta__ = { "_edit_bone_":true, "_edit_ik_":true }
 body = NodePath("../../body")
 limb = NodePath("../../body/body_lower/leg_upper_r")
-length = Vector2( 0, -16 )
 
 [node name="sprite_leg_upper_r" type="Sprite" parent="lower_body/leg_upper_r"]
 
@@ -1004,7 +998,6 @@ script/script = ExtResource( 4 )
 __meta__ = { "_edit_bone_":true }
 body = NodePath("../../../body")
 limb = NodePath("../../../body/body_lower/leg_upper_r/leg_lower_r")
-length = Vector2( 0, -16 )
 
 [node name="sprite_leg_lower_r" type="Sprite" parent="lower_body/leg_upper_r/leg_lower_r"]
 
@@ -1034,7 +1027,6 @@ script/script = ExtResource( 4 )
 __meta__ = { "_edit_bone_":true }
 body = NodePath("../../../../body")
 limb = NodePath("../../../../body/body_lower/leg_upper_r/leg_lower_r/foot_r")
-length = Vector2( 0, -8 )
 
 [node name="sprite_leg_lower_r1" type="Sprite" parent="lower_body/leg_upper_r/leg_lower_r/foot_r"]
 
@@ -1070,7 +1062,6 @@ script/script = ExtResource( 4 )
 __meta__ = { "_edit_bone_":true, "_edit_ik_":true }
 body = NodePath("../../body")
 limb = NodePath("../../body/body_lower/leg_upper_l")
-length = Vector2( 0, -16 )
 
 [node name="sprite_leg_upper_l" type="Sprite" parent="lower_body/leg_upper_l"]
 
@@ -1100,7 +1091,6 @@ script/script = ExtResource( 4 )
 __meta__ = { "_edit_bone_":true }
 body = NodePath("../../../body")
 limb = NodePath("../../../body/body_lower/leg_upper_l/leg_lower_l")
-length = Vector2( 0, -32 )
 
 [node name="sprite_leg_lower_l" type="Sprite" parent="lower_body/leg_upper_l/leg_lower_l"]
 
@@ -1130,7 +1120,6 @@ script/script = ExtResource( 4 )
 __meta__ = { "_edit_bone_":true }
 body = NodePath("../../../../body")
 limb = NodePath("../../../../body/body_lower/leg_upper_l/leg_lower_l/foot_l")
-length = Vector2( 0, -8 )
 
 [node name="sprite_foot_l" type="Sprite" parent="lower_body/leg_upper_l/leg_lower_l/foot_l"]
 

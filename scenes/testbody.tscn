@@ -1,8 +1,10 @@
 [gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://scenes/body.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scripts/testbody.gd" type="Script" id=2]
-[ext_resource path="res://scripts/status.gd" type="Script" id=3]
+[ext_resource path="res://scripts/examples/testbody.gd" type="Script" id=2]
+[ext_resource path="res://scripts/examples/status.gd" type="Script" id=3]
+
+
 
 [node name="root" type="Node"]
 
@@ -16,8 +18,10 @@ vitalThresholdDamage = 0.25
 vesselBleedRate = 10.0
 arteryBleedRate = 500.0
 vesselHealRate = 1.0
+arteryHealRate = 0.0
 blood = 1000.0
 bleedOutThreshHold = 500.0
+bloodRegenRate = 1.0
 structureDetachThreshold = 0.1
 
 [node name="Label" type="Label" parent="."]

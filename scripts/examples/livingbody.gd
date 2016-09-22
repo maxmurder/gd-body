@@ -1,4 +1,6 @@
-extends "res://scripts/body.gd"
+#example body implementation
+
+extends "res://scripts/gd-body.gd"
 
 export(String, FILE) var materialFile = "res://data/materials.json"
 export(float) var systemThreshold = 0.5 #integrity/damage threshold for regular system components
@@ -14,7 +16,7 @@ export(float) var bloodRegenRate = 1.0 #blood regeneration rate
 export(float) var structureDetachThreshold = 0.1 #STRUCTURE material integrity threshold for limb detact
 
 var _status = {}
-const _limbscript = preload("res://scripts/limb.gd")
+const _limbscript = preload("res://scripts/gd-limb.gd")
 onready var _materialdata = loadjson(materialFile)
 onready var _maxblood = blood
 

@@ -1,3 +1,8 @@
+#
+#
+#
+#
+
 extends Node
 
 export(String, FILE) var systemFile = "res://data/systems.json"
@@ -13,11 +18,13 @@ func _ready():
     _systems = setupsystems(_limbs)
     pass
 
+#get the data for a system
 func getsystem(system):
     if _systems.has(system):
         return _systems[system]
     return false
 
+#generate system data
 func setupsystems(limbs):
     if _systemdata == null:
         return
@@ -35,6 +42,7 @@ func setupsystems(limbs):
             dict[s] = list
     return dict
 
+#generate body data
 static func setupbody(node):
     var dict = {}
     for n in node.get_children():
@@ -55,6 +63,7 @@ static func setupbody(node):
         }
     return dict
 
+#json loader function
 static func loadjson(path):
     var dict = {}
     var file = File.new()
