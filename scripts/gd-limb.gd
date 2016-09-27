@@ -1,3 +1,8 @@
+# gd-limb.gd
+# Limb container class. gd-body.gd will take the information from this class in
+# its body generation. This class can also be used to store staus information
+# about individual limbs.
+ 
 extends Node
 
 export(float, 0.0, 1.0, 0.01) var size = 1.0

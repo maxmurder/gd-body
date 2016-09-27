@@ -1,12 +1,12 @@
-#
-#
-#
-#
+# gd-body.gd
+# This script will look for any objects in its tree with a gd-limb script attached
+# and use the gd-limb information to build body and physical system data containers
+# stored and addressable as json.
 
 extends Node
 
-export(String, FILE) var systemFile = "res://data/systems.json"
-export(String, FILE) var flagFile = "res://data/flags.json"
+export(String, FILE) var systemFile = "res://data/systems.json" # config file for System data
+export(String, FILE) var flagFile = "res://data/flags.json" # config file for flag data 
 
 onready var _systemdata = loadjson(systemFile)
 onready var _flagdata = loadjson(flagFile)
