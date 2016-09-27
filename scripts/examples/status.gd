@@ -1,4 +1,4 @@
-
+# Display status of a system.s
 extends Label
 
 export(String) var system

@@ -1,6 +1,9 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=10 format=1]
 
-[ext_resource path="res://image/checker.png" type="Texture" id=1]
+[ext_resource path="res://scripts/examples/rigidbodylimb.gd" type="Script" id=1]
+[ext_resource path="res://image/checker.png" type="Texture" id=2]
+[ext_resource path="res://scenes/body.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/examples/livingbody.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -31,7 +34,7 @@ radius = 10.0
 
 [node name="body_lower" type="RigidBody2D"]
 
-input/pickable = false
+input/pickable = true
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
@@ -44,14 +47,19 @@ bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
+contacts_reported = 1
+contact_monitor = true
 sleeping = false
 can_sleep = true
 velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+body = NodePath("body")
+limb = NodePath("body/body_lower")
+joint = NodePath("spine")
+physicsDamageThreshold = 50.0
 
 [node name="collision_body_lower" type="CollisionShape2D" parent="."]
 
@@ -61,15 +69,14 @@ _update_shape_index = 0
 
 [node name="sprite_body_lower" type="Sprite" parent="."]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 region = true
 region_rect = Rect2( 0, 0, 32, 32 )
 
 [node name="body_upper" type="RigidBody2D" parent="."]
 
-editor/display_folded = true
 transform/pos = Vector2( 0, -32 )
-input/pickable = false
+input/pickable = true
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
@@ -82,14 +89,19 @@ bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
+contacts_reported = 1
+contact_monitor = true
 sleeping = false
 can_sleep = true
 velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+body = NodePath("../body")
+limb = NodePath("../body/body_lower/body_upper")
+joint = NodePath("../spine")
+physicsDamageThreshold = 50.0
 
 [node name="collision_body_upper" type="CollisionShape2D" parent="body_upper"]
 
@@ -99,14 +111,14 @@ _update_shape_index = 0
 
 [node name="sprite_body_upper" type="Sprite" parent="body_upper"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 region = true
 region_rect = Rect2( 0, 0, 32, 32 )
 
 [node name="head" type="RigidBody2D" parent="body_upper"]
 
 transform/pos = Vector2( 0, -24 )
-input/pickable = false
+input/pickable = true
 shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
@@ -119,7 +131,7 @@ bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
+contacts_reported = 1
 contact_monitor = false
 sleeping = false
 can_sleep = true
@@ -127,6 +139,11 @@ velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+body = NodePath("../../body")
+limb = NodePath("../../body/body_lower/body_upper/neck/head")
+joint = NodePath("../../neck")
+physicsDamageThreshold = 50.0
 
 [node name="collision_head" type="CollisionShape2D" parent="body_upper/head"]
 
@@ -136,14 +153,14 @@ _update_shape_index = 0
 
 [node name="sprite_head" type="Sprite" parent="body_upper/head"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 region = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="arm_upper_r" type="RigidBody2D" parent="body_upper"]
 
 transform/pos = Vector2( 32, 0 )
-input/pickable = false
+input/pickable = true
 shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, 0, 0 )
 shapes/0/trigger = false
@@ -156,14 +173,19 @@ bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
+contacts_reported = 1
+contact_monitor = true
 sleeping = false
 can_sleep = true
 velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+body = NodePath("../../body")
+limb = NodePath("../../body/body_lower/body_upper/arm_upper_r")
+joint = NodePath("../../shoulder_r")
+physicsDamageThreshold = 50.0
 
 [node name="collision_arm_upper_r" type="CollisionShape2D" parent="body_upper/arm_upper_r"]
 
@@ -174,14 +196,14 @@ _update_shape_index = 0
 
 [node name="sprite_arm_upper_r" type="Sprite" parent="body_upper/arm_upper_r"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 region = true
 region_rect = Rect2( 0, 0, 32, 16 )
 
 [node name="arm_lower_r" type="RigidBody2D" parent="body_upper/arm_upper_r"]
 
 transform/pos = Vector2( 32, 0 )
-input/pickable = false
+input/pickable = true
 shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, 0, 0 )
 shapes/0/trigger = false
@@ -194,14 +216,19 @@ bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
+contacts_reported = 1
+contact_monitor = true
 sleeping = false
 can_sleep = true
 velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+body = NodePath("../../../body")
+limb = NodePath("../../../body/body_lower/body_upper/arm_upper_r/arm_lower_r")
+joint = NodePath("../../../elbow_r")
+physicsDamageThreshold = 50.0
 
 [node name="collision_arm_lower_r" type="CollisionShape2D" parent="body_upper/arm_upper_r/arm_lower_r"]
 
@@ -212,14 +239,14 @@ _update_shape_index = 0
 
 [node name="sprite_arm_lower_r" type="Sprite" parent="body_upper/arm_upper_r/arm_lower_r"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 region = true
 region_rect = Rect2( 0, 0, 32, 16 )
 
 [node name="arm_hand_r" type="RigidBody2D" parent="body_upper/arm_upper_r/arm_lower_r"]
 
 transform/pos = Vector2( 24, 0 )
-input/pickable = false
+input/pickable = true
 shapes/0/shape = SubResource( 4 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
@@ -232,14 +259,19 @@ bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
+contacts_reported = 1
+contact_monitor = true
 sleeping = false
 can_sleep = true
 velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+body = NodePath("../../../../body")
+limb = NodePath("../../../../body/body_lower/body_upper/arm_upper_r/arm_lower_r/hand_r")
+joint = NodePath("../../../../wrist_r")
+physicsDamageThreshold = 50.0
 
 [node name="collision_hand_r" type="CollisionShape2D" parent="body_upper/arm_upper_r/arm_lower_r/arm_hand_r"]
 
@@ -249,14 +281,14 @@ _update_shape_index = 0
 
 [node name="sprite_hand_r" type="Sprite" parent="body_upper/arm_upper_r/arm_lower_r/arm_hand_r"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 region = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="arm_upper_l" type="RigidBody2D" parent="body_upper"]
 
 transform/pos = Vector2( -32, 0 )
-input/pickable = false
+input/pickable = true
 shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, 0, 0 )
 shapes/0/trigger = false
@@ -269,14 +301,19 @@ bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
+contacts_reported = 1
+contact_monitor = true
 sleeping = false
 can_sleep = true
 velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+body = NodePath("../../body")
+limb = NodePath("../../body/body_lower/body_upper/arm_upper_l")
+joint = NodePath("../../shoulder_l")
+physicsDamageThreshold = 50.0
 
 [node name="collision_arm_upper_l" type="CollisionShape2D" parent="body_upper/arm_upper_l"]
 
@@ -287,14 +324,14 @@ _update_shape_index = 0
 
 [node name="sprite_arm_upper_l" type="Sprite" parent="body_upper/arm_upper_l"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 region = true
 region_rect = Rect2( 16, 0, 32, 16 )
 
 [node name="arm_lower_l" type="RigidBody2D" parent="body_upper/arm_upper_l"]
 
 transform/pos = Vector2( -32, 0 )
-input/pickable = false
+input/pickable = true
 shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, 0, 0 )
 shapes/0/trigger = false
@@ -307,14 +344,19 @@ bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
+contacts_reported = 1
+contact_monitor = true
 sleeping = false
 can_sleep = true
 velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+body = NodePath("../../../body")
+limb = NodePath("../../../body/body_lower/body_upper/arm_upper_r/arm_lower_r")
+joint = NodePath("../../../elbow_l")
+physicsDamageThreshold = 50.0
 
 [node name="collision_arm_lower_l" type="CollisionShape2D" parent="body_upper/arm_upper_l/arm_lower_l"]
 
@@ -325,14 +367,14 @@ _update_shape_index = 0
 
 [node name="sprite_arm_lower_l" type="Sprite" parent="body_upper/arm_upper_l/arm_lower_l"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 region = true
 region_rect = Rect2( 16, 0, 32, 16 )
 
 [node name="arm_hand_l" type="RigidBody2D" parent="body_upper/arm_upper_l/arm_lower_l"]
 
 transform/pos = Vector2( -24, 0 )
-input/pickable = false
+input/pickable = true
 shapes/0/shape = SubResource( 4 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
@@ -345,14 +387,19 @@ bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
+contacts_reported = 1
+contact_monitor = true
 sleeping = false
 can_sleep = true
 velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+body = NodePath("../../../../body")
+limb = NodePath("../../../../body/body_lower/body_upper/arm_upper_l/arm_lower_l/hand_l")
+joint = NodePath("../../../../wrist_l")
+physicsDamageThreshold = 50.0
 
 [node name="collision_hand_l" type="CollisionShape2D" parent="body_upper/arm_upper_l/arm_lower_l/arm_hand_l"]
 
@@ -362,15 +409,14 @@ _update_shape_index = 0
 
 [node name="sprite_hand_l" type="Sprite" parent="body_upper/arm_upper_l/arm_lower_l/arm_hand_l"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 region = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="leg_upper_r" type="RigidBody2D" parent="."]
 
-editor/display_folded = true
 transform/pos = Vector2( 8, 32 )
-input/pickable = false
+input/pickable = true
 shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
@@ -383,14 +429,19 @@ bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
+contacts_reported = 1
+contact_monitor = true
 sleeping = false
 can_sleep = true
 velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+body = NodePath("../body")
+limb = NodePath("../body/body_lower/leg_upper_r")
+joint = NodePath("../hip_r")
+physicsDamageThreshold = 50.0
 
 [node name="collision_leg_upper_r" type="CollisionShape2D" parent="leg_upper_r"]
 
@@ -400,14 +451,14 @@ _update_shape_index = 0
 
 [node name="sprite_leg_upper_r" type="Sprite" parent="leg_upper_r"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 region = true
 region_rect = Rect2( 0, 0, 16, 32 )
 
 [node name="leg_lower_r" type="RigidBody2D" parent="leg_upper_r"]
 
 transform/pos = Vector2( 0, 32 )
-input/pickable = false
+input/pickable = true
 shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
@@ -420,14 +471,19 @@ bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
+contacts_reported = 1
+contact_monitor = true
 sleeping = false
 can_sleep = true
 velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+body = NodePath("../../body")
+limb = NodePath("../../body/body_lower/leg_upper_r/leg_lower_r")
+joint = NodePath("../../knee_r")
+physicsDamageThreshold = 50.0
 
 [node name="collision_leg_lower_r" type="CollisionShape2D" parent="leg_upper_r/leg_lower_r"]
 
@@ -437,14 +493,14 @@ _update_shape_index = 0
 
 [node name="sprite_leg_lower_r" type="Sprite" parent="leg_upper_r/leg_lower_r"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 region = true
 region_rect = Rect2( 0, 0, 16, 32 )
 
 [node name="foot_r" type="RigidBody2D" parent="leg_upper_r/leg_lower_r"]
 
 transform/pos = Vector2( 0, 24 )
-input/pickable = false
+input/pickable = true
 shapes/0/shape = SubResource( 5 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
@@ -457,14 +513,19 @@ bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
+contacts_reported = 1
+contact_monitor = true
 sleeping = false
 can_sleep = true
 velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+body = NodePath("../../../body")
+limb = NodePath("../../../body/body_lower/leg_upper_r/leg_lower_r/foot_r")
+joint = NodePath("../../../ankle_r")
+physicsDamageThreshold = 50.0
 
 [node name="collision_foot_r" type="CollisionShape2D" parent="leg_upper_r/leg_lower_r/foot_r"]
 
@@ -474,13 +535,12 @@ _update_shape_index = 0
 
 [node name="sprite_foot_r" type="Sprite" parent="leg_upper_r/leg_lower_r/foot_r"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 region = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="leg_upper_l" type="RigidBody2D" parent="."]
 
-editor/display_folded = true
 transform/pos = Vector2( -8, 32 )
 input/pickable = false
 shapes/0/shape = SubResource( 3 )
@@ -503,6 +563,11 @@ velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+body = NodePath("../body")
+limb = NodePath("../body/body_lower/leg_upper_l")
+joint = NodePath("../hip_l")
+physicsDamageThreshold = 50.0
 
 [node name="collision_leg_upper_l" type="CollisionShape2D" parent="leg_upper_l"]
 
@@ -512,7 +577,7 @@ _update_shape_index = 0
 
 [node name="sprite_leg_upper_l" type="Sprite" parent="leg_upper_l"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 region = true
 region_rect = Rect2( 0, 0, 16, 32 )
 
@@ -540,6 +605,11 @@ velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+body = NodePath("../../body")
+limb = NodePath("../../body/body_lower/leg_upper_l/leg_lower_l")
+joint = NodePath("../../knee_l")
+physicsDamageThreshold = 50.0
 
 [node name="collision_leg_lower_l" type="CollisionShape2D" parent="leg_upper_l/leg_lower_l"]
 
@@ -549,14 +619,14 @@ _update_shape_index = 0
 
 [node name="sprite_leg_lower_l" type="Sprite" parent="leg_upper_l/leg_lower_l"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 region = true
 region_rect = Rect2( 0, 0, 16, 32 )
 
 [node name="foot_l" type="RigidBody2D" parent="leg_upper_l/leg_lower_l"]
 
 transform/pos = Vector2( 0, 24 )
-input/pickable = false
+input/pickable = true
 shapes/0/shape = SubResource( 5 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
@@ -569,14 +639,19 @@ bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
+contacts_reported = 1
+contact_monitor = true
 sleeping = false
 can_sleep = true
 velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
+script/script = ExtResource( 1 )
+body = NodePath("../../../body")
+limb = NodePath("../../../body/body_lower/leg_upper_l/leg_lower_l/foot_l")
+joint = NodePath("../../../ankle_l")
+physicsDamageThreshold = 50.0
 
 [node name="collision_foot_l" type="CollisionShape2D" parent="leg_upper_l/leg_lower_l/foot_l"]
 
@@ -586,7 +661,7 @@ _update_shape_index = 0
 
 [node name="sprite_foot_l" type="Sprite" parent="leg_upper_l/leg_lower_l/foot_l"]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 region = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
@@ -715,5 +790,22 @@ node_b = NodePath("../leg_upper_l/leg_lower_l/foot_l")
 bias/bias = 0.0
 collision/exclude_nodes = true
 softness = 1.0
+
+[node name="body" parent="." instance=ExtResource( 3 )]
+
+editor/display_folded = true
+script/script = ExtResource( 4 )
+materialFile = "res://data/materials.json"
+systemThreshold = 0.5
+vitalThresholdIntegrity = 0.5
+vitalThresholdDamage = 0.25
+vesselBleedRate = 10.0
+arteryBleedRate = 50.0
+vesselHealRate = 0.5
+arteryHealRate = 0.0
+blood = 1000.0
+bleedOutThreshHold = 0.0
+bloodRegenRate = 1.0
+structureDetachThreshold = 0.1
 
 

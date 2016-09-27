@@ -1,4 +1,6 @@
-#example kinematic limb container
+# Example kinematic limb container
+# Test implementation allows user to left click on a limb to apply damage and
+# right click on a limb to sever.
 
 extends KinematicBody2D
 

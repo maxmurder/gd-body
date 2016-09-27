@@ -1,3 +1,4 @@
+# Test controller for livingbody.
 extends "res://scripts/livingbody.gd"
 
 func _ready():

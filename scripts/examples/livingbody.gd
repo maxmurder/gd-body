@@ -1,4 +1,6 @@
-#example body implementation
+# Example gd-body implementation
+# Tracks the status of several special systems simulating the circulitory system
+# and severing of limbs. 
 
 extends "res://scripts/gd-body.gd"
 

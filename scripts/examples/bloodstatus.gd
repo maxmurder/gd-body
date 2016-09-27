@@ -1,3 +1,4 @@
+# Display amount of blood.
 
 extends Label
 

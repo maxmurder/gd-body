@@ -1,4 +1,6 @@
-
+# Example player controller implementation.
+# Allows the user to move with the directional action buttons if the body's
+# LOCOMOTION system is functioning
 extends Node2D
 
 export(NodePath) var body
